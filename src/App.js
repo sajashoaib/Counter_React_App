@@ -8,31 +8,36 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      counters: [{ value: 0 }, { value: 0 }, { value: 0 }]
-
+  total: 0,
     };
   }
+ handleIncrement = (amount) => {
+    this.setState((prevState) => ({
+      total: prevState.total + amount,
+    }));
+  };
 
-  handleCounterChange = (index, value) => {
-    const { counters } = this.state;
-    const updatedCounters = [...counters];
-    updatedCounters[index] = { value: value };
-    this.setState({ counters: updatedCounters });
-  }
+  handleDecrement = (amount) => {
+    this.setState((prevState) => ({
+      total: prevState.total - amount,
+    }));
+  };
 
   render() {
-    const { counters } = this.state;
+    const counters = Array(4).fill(null);
+    const { total } = this.state;
 
     return (
       <div>
-        {counters.map((value, index) => (
+        {counters.map((_, index) => (
           <CounterPage
             key={index}
-            onIncrement={(amount) => this.handleCounterChange(index, amount)}
-            onDecrement={(amount) => this.handleCounterChange(index, amount)}
+           onIncrement={this.handleIncrement}
+           onDecrement={this.handleDecrement}
           />
         ))}
-        <TotalPage counters={counters} />
+               <TotalPage totalValue={total} />
+
       </div>
     );
   }
@@ -40,3 +45,4 @@ class App extends React.Component {
 
 
 export default App;
+

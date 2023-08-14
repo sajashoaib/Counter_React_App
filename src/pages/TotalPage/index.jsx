@@ -1,12 +1,11 @@
 import React from 'react';
 class TotalPage extends React.Component {
   render() {
-    const { counters } = this.props;
-    const total = counters.reduce((sum, counter) => sum + counter.value, 0);
+    const { totalValue } = this.props;
 
     return (
       <div>
-        <h2>Total: {total}</h2>
+        <h2>Total: {totalValue}</h2>
       </div>
     );
   }
